@@ -1,0 +1,48 @@
+server:
+  port: 10000
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*.xml
+  type-aliases-package: com.kanghaopeng.entity
+  global-config:
+    db-config:
+      id-type: auto
+
+
+
+
+spring:
+  mail:
+    host: smtp.163.com       # SMTP服务器主机名
+    port: 465               # SMTP服务器端口号
+    username: boatman2023@163.com    # 发件人邮箱账号
+    password: IGDCXBYSYMQNOMYT  # 发件人邮箱密码
+    protocol: smtps         # 邮件协议，默认为smtps
+    defaultEncoding: UTF-8  # 邮件编码，默认为UTF-8
+    properties:
+      mail.smtp.auth: true   # 开启SMTP认证
+      mail.smtp.starttls.enable: true # 开启TLS支持，也可以用smtps代替smtp
+      mail.smtp.ssl.checkserveridentity: true # 开启SSL身份验证
+      mail.smtp.ssl.trust: smtp.qq.com # 信任指定的SSL证书
+
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test_base_management?useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: root
+    password: root
+
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      password:
+      jedis:
+        pool:
+          max-active: 8
+          max-wait: -1
+          max-idle: 8
+          min-idle: 0
+      timeout: 20000
+      connect-timeout: 30000
+
+
