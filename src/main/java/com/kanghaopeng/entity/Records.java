@@ -1,5 +1,6 @@
 package com.kanghaopeng.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
@@ -14,14 +15,17 @@ import java.sql.Date;
 @TableName("Records")
 public class Records {
     @TableId
-    private int id;
-    private int userId;
-    private int questionId;
-
+    @TableField("id")
+    private Integer id;
+    @TableField("userId")
+    private Integer userId;
+    @TableField("questionId")
+    private Integer questionId;
+    @TableField("answer")
     private String answer;
-
-    private int isCorrect;
-
+    @TableField("isCorrect")
+    private Integer isCorrect;
+    @TableField("timestamp")
     private Date timestamp;
 
 

@@ -9,8 +9,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 @Repository
 public interface QuestionsMapper extends BaseMapper<Questions> {
-     @Select("SELECT * FROM questions WHERE questiontypes = #{questiontypes} ORDER BY RAND() LIMIT 70")
-     List<Questions> SelectTypeQuestions(@Param("questiontypes")String questiontypes);
-
-
+     @Select("SELECT * FROM questions WHERE questiontypes = #{questiontypes} ORDER BY RAND() LIMIT #{Count}")
+     List<Questions> SelectTypeQuestions(@Param("questiontypes")String questiontypes,@Param("Count")int Count);
 }

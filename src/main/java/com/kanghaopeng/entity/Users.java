@@ -13,7 +13,7 @@ import java.sql.Date;
 @TableName("Users")
 public class Users {
     @TableId
-    private int id;
+    private Integer id;
 
     private String username;
     private String password;

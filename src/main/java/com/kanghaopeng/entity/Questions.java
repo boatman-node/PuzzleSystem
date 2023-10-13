@@ -12,11 +12,11 @@ import lombok.NoArgsConstructor;
 @TableName("Questions")
 public class Questions {
     @TableId
-    private int id;
+    private Integer id;
     private String title;
     private String content;
     private String type;
     private String questiontypes;
-    private int difficulty;
+    private Integer difficulty;
     private String answer;
 }

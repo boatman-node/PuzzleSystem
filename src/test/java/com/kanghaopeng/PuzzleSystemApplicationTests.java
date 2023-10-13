@@ -1,23 +1,25 @@
 package com.kanghaopeng;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.google.gson.Gson;
 import com.kanghaopeng.Enum.Captcha;
+import com.kanghaopeng.dtos.ResponseResult;
 import com.kanghaopeng.entity.Questions;
 import com.kanghaopeng.entity.Records;
 import com.kanghaopeng.entity.Users;
 import com.kanghaopeng.mapper.QuestionsMapper;
 import com.kanghaopeng.mapper.RecordsMapper;
-import com.kanghaopeng.service.EmailService;
-import com.kanghaopeng.service.RecordsService;
-import com.kanghaopeng.service.RedisService;
-import com.kanghaopeng.service.UsersService;
+import com.kanghaopeng.mapper.UsersMapper;
+import com.kanghaopeng.service.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mail.javamail.JavaMailSender;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootTest
 public class PuzzleSystemApplicationTests {
@@ -37,13 +39,17 @@ public class PuzzleSystemApplicationTests {
 	RecordsService recordsService;
 	@Autowired
 	EmailService service;
+
+	@Autowired
+	QuestionsService questionsService;
 	@Test
 	public void Test00(){
 		service.SendMailbox("1963470712@qq.com","ne");
 	}
 	@Test
 	public void Test01(){
-		questionsMapper.SelectTypeQuestions("数学").forEach(e-> System.out.println(gson.toJson(e)));
+		List<Questions> q1 = questionsMapper.SelectTypeQuestions("数学", 2);
+		System.out.println(gson.toJson(q1));
 	}
 
 
@@ -89,7 +95,7 @@ public class PuzzleSystemApplicationTests {
 	@Test
 	public void Test05(){
 		ArrayList<Records> records = new ArrayList<>();
-		for (int i = 1; i < 20; i++) {
+		for (int i = 1; i < 100; i++) {
 			Records re= new Records();
 			re.setUserId(1);
 			re.setQuestionId(i);
@@ -99,5 +105,19 @@ public class PuzzleSystemApplicationTests {
 			records.add(re);
 		}
 		System.out.println(gson.toJson( recordsService.RecordsBatchInsert(records)));
+	}
+    @Autowired
+	RecordsMapper mapper;
+	@Autowired
+	UsersMapper usersMapper;
+
+	@Test
+	public void Test06(){
+		Records records = new Records();
+		records.setUserId(1);
+		records.setIsCorrect(1);
+		System.out.println(records);
+		ResponseResult<Records> responseResult = recordsService.RecordSelectBatch(records,5,1);
+		System.out.println(gson.toJson(responseResult.getData()));
 	}
 }
