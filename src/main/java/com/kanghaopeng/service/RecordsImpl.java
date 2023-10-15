@@ -1,4 +1,4 @@
-package com.kanghaopeng.Impl;
+package com.kanghaopeng.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -10,7 +10,8 @@ import java.sql.Date;
 import java.util.List;
 
 public interface RecordsImpl extends IService<Records> {
-       ResponseResult RecordsBatchInsert(List<Records> recordsList);
+    ResponseResult RecordsBatchInsert(List<Records> recordsList);
 
-       ResponseResult RecordSelectBatch(Records records,int pageNum, int pageSize);
+    ResponseResult RecordSelectBatch(Records records,int pageNum, int pageSize);
+
 }

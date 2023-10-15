@@ -1,3 +1,10 @@
+
+jwt:
+  secret: kanghaopeng
+Mailbox:
+  Account: boatman2023@163.com
+  subject: BoatMan
+
 server:
   port: 10000
 mybatis-plus:
@@ -6,10 +13,6 @@ mybatis-plus:
   global-config:
     db-config:
       id-type: auto
-
-
-
-
 spring:
   mail:
     host: smtp.163.com       # SMTP服务器主机名

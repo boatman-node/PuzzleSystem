@@ -1,4 +1,4 @@
-package com.kanghaopeng.Impl;
+package com.kanghaopeng.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.kanghaopeng.Enum.Captcha;
@@ -8,8 +8,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UsersImpl extends IService<Users> {
-   ResponseResult<String> SignAccount(Users users,String CaptchaDate);
-   ResponseResult<String> verificationCode(Users users, Captcha captcha);
+    ResponseResult SignAccount(Users users,String CaptchaDate);
 
-   ResponseResult<String> ModifyInformation(Users user,String CaptchaDate);
+    ResponseResult<String> ModifyInformation(Users user,String CaptchaDate);
+
+    ResponseResult  landingAccount(Users users);
+
 }

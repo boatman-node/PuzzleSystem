@@ -27,6 +27,4 @@ public class Records {
     private Integer isCorrect;
     @TableField("timestamp")
     private Date timestamp;
-
-
 }

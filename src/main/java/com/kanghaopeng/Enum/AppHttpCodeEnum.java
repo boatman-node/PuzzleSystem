@@ -4,18 +4,16 @@ public enum AppHttpCodeEnum {
 
     // 成功段0
     SUCCESS(200,"操作成功"),
-
     FAIL(400,"操作失败"),
     // 登录段1~50
     NEED_LOGIN(1,"需要登录后操作"),
     LOGIN_PASSWORD_ERROR(2,"密码错误"),
-    // TOKEN50~100
+    CAPTCHA_ERROR(3,"验证码错误"),
+
+        // TOKEN50~100
     TOKEN_INVALID(50,"无效的TOKEN"),
     TOKEN_EXPIRE(51,"TOKEN已过期"),
     TOKEN_REQUIRE(52,"TOKEN是必须的"),
-    // SIGN验签 100~120
-    SIGN_INVALID(100,"无效的SIGN"),
-    SIG_TIMEOUT(101,"SIGN已过期"),
     // 参数错误 500~1000
     PARAM_REQUIRE(500,"缺少参数"),
     PARAM_INVALID(501,"无效参数"),
@@ -26,9 +24,7 @@ public enum AppHttpCodeEnum {
     AP_USER_DATA_NOT_EXIST(1001,"ApUser数据不存在"),
     DATA_NOT_EXIST(1002,"数据不存在"),
     // 数据错误 3000~3500
-    NO_OPERATOR_AUTH(3000,"无权限操作"),
-    EXIST_USERNAME(2000,"账户名已经存在"),
-    DUPLICATE_SUBMISSIONS(4001,"重复提交");
+    NO_OPERATOR_AUTH(3000,"无权限操作");
 
 
 

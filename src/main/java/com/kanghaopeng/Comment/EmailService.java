@@ -1,9 +1,12 @@
-package com.kanghaopeng.service;
+package com.kanghaopeng.Comment;
 import com.kanghaopeng.Enum.AppHttpCodeEnum;
+import com.kanghaopeng.Enum.Captcha;
 import com.kanghaopeng.dtos.ResponseResult;
+import com.kanghaopeng.tools.SmallTools;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -11,27 +14,29 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class EmailService {
-    private final String MailboxNumber="boatman2023@163.com";
-
-    private final String subject="BoatMan";
-
+    @Value("${Mailbox.Account}")
+    private  String Account="boatman2023@163.com";
+    @Value("${Mailbox.subject}")
+    private String subject="BoatMan";
+    @Autowired
+    RedisService redisService;
     @Autowired
     JavaMailSender javaMailSender;
-
-    public ResponseResult<String> SendMailbox(String toEmail,String Code){
-
+    public ResponseResult<String> SendMailbox(String toEmail,String Captcha,String UserName){
+        String Small ;
         try {
             MimeMessage mimeMessage = javaMailSender.createMimeMessage();
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage,true,"UTF-8");
             mimeMessageHelper.setTo(toEmail);
-            mimeMessageHelper.setFrom(MailboxNumber);
+            mimeMessageHelper.setFrom(toEmail);
             mimeMessageHelper.setSubject(subject);
-            mimeMessageHelper.setText(GetHtml(Code),true);
+            Small = SmallTools.generateCaptcha();
+            mimeMessageHelper.setText(GetHtml(SmallTools.generateCaptcha()),true);
             javaMailSender.send(mimeMessage);
-
         } catch (MessagingException e) {
             return ResponseResult.errorResult(AppHttpCodeEnum.FAIL,"邮箱发送失败,请稍后尝试!");
         }
+           redisService.set(UserName+"_"+Captcha,Small,3L);
         return ResponseResult.okResult(200,"邮箱发送成功!");
     }
 

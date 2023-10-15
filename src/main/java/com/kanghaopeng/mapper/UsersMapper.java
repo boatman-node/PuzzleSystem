@@ -11,7 +11,4 @@ import org.springframework.stereotype.Repository;
 public interface UsersMapper extends BaseMapper<Users> {
     @Select("select * from Users where username = #{username}")
     Users OneUser(@Param("username")String username);
-
-    @Update("UPDATE users")
-    int updateUserInfo(Users users);
 }

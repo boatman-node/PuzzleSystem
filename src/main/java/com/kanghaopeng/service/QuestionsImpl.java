@@ -1,13 +1,13 @@
-package com.kanghaopeng.Impl;
+package com.kanghaopeng.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.kanghaopeng.dtos.ResponseResult;
 import com.kanghaopeng.entity.Questions;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
 public interface QuestionsImpl extends IService<Questions> {
-    List<Questions> SelectTypeQuestions(String questiontypes);
+    ResponseResult SelectTypeQuestions(String token,String questiontypes, int Count);
 }
